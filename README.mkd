@@ -1,0 +1,34 @@
+# C++ code for RabbitMQ tutorials
+
+Almost the same examples as in [AMQP-CPP](https://github.com/CopernicaMarketingSoftware/AMQP-CPP)
+project (see examples directory). With some minor changes. Based on
+[libevent](http://libevent.org).
+
+## Code
+
+[Tutorial one: "Hello World!"](http://www.rabbitmq.com/tutorial-one-python.html):
+
+    consumer.cpp
+    producer.cpp
+
+
+[Tutorial two: Work Queues](http://www.rabbitmq.com/tutorial-two-python.html):
+
+    tyrant.cpp
+    worker.cpp
+
+[Tutorial three: Publish/Subscribe](http://www.rabbitmq.com/tutorial-three-python.html):
+
+
+
+[Tutorial four: Routing](http://www.rabbitmq.com/tutorial-four-python.html):
+
+
+
+[Tutorial five: Topics](http://www.rabbitmq.com/tutorial-five-python.html):
+
+
+
+[Tutorial six: RPC](http://www.rabbitmq.com/tutorial-six-python.html):
+
+

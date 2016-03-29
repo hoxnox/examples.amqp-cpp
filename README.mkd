@@ -8,19 +8,19 @@ project (see examples directory). With some minor changes. Based on
 
 [Tutorial one: "Hello World!"](http://www.rabbitmq.com/tutorial-one-python.html):
 
-    consumer.cpp
-    producer.cpp
+    receive
+    send
 
 
 [Tutorial two: Work Queues](http://www.rabbitmq.com/tutorial-two-python.html):
 
-    tyrant.cpp
-    worker.cpp
+    new_task
+    worker
 
 [Tutorial three: Publish/Subscribe](http://www.rabbitmq.com/tutorial-three-python.html):
 
-    logsender.cpp
-    logreceiver.cpp
+    receive_logs
+    emit_log
 
 [Tutorial four: Routing](http://www.rabbitmq.com/tutorial-four-python.html):
 

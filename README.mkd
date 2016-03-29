@@ -19,7 +19,8 @@ project (see examples directory). With some minor changes. Based on
 
 [Tutorial three: Publish/Subscribe](http://www.rabbitmq.com/tutorial-three-python.html):
 
-
+    logsender.cpp
+    logreceiver.cpp
 
 [Tutorial four: Routing](http://www.rabbitmq.com/tutorial-four-python.html):
 

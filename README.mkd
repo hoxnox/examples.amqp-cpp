@@ -24,7 +24,8 @@ project (see examples directory). With some minor changes. Based on
 
 [Tutorial four: Routing](http://www.rabbitmq.com/tutorial-four-python.html):
 
-
+    receive_logs_direct
+    emit_log_direct
 
 [Tutorial five: Topics](http://www.rabbitmq.com/tutorial-five-python.html):
 

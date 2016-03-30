@@ -29,8 +29,11 @@ project (see examples directory). With some minor changes. Based on
 
 [Tutorial five: Topics](http://www.rabbitmq.com/tutorial-five-python.html):
 
-
+    receive_logs_topic
+    emit_log_topic
 
 [Tutorial six: RPC](http://www.rabbitmq.com/tutorial-six-python.html):
 
+    rpc_server
+    rpc_client
 

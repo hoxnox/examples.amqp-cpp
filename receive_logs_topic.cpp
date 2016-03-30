@@ -23,7 +23,7 @@ main(int argc, char* argv[])
             std::cout << "Channel error: " << message << std::endl;
             handler.Stop();
         });
-    channel.declareExchange("topic_logs", AMQP::topic | AMQP::autodelete);
+    channel.declareExchange("topic_logs", AMQP::topic);
     channel.declareQueue("logs", AMQP::exclusive);
     std::for_each (argv + 1, argv + argc,
         [&](const char* bind_key)

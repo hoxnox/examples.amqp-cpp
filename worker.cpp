@@ -12,6 +12,11 @@ int main(void)
             AMQP::Address("localhost", 5672,
                           AMQP::Login("guest", "guest"), "/"));
     AMQP::TcpChannel channel(&connection);
+    channel.onError([&handler](const char* message)
+        {
+            std::cout << "Channel error: " << message << std::endl;
+            handler.Stop();
+        });
 
     channel.setQos(1);
     channel.declareQueue("task_queue", AMQP::durable);

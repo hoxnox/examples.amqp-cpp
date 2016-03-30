@@ -18,8 +18,9 @@ join(InIter begin, InIter end, std::string delim)
 int
 main(int argc, const char* argv[])
 {
+    const std::string routing_key = argc > 2 ? argv[1] : "anonymous.info";
     const std::string msg =
-            argc > 1 ? join(&argv[1], &argv[argc], " ") : "Hello World!";
+            argc > 2 ? join(&argv[2], &argv[argc], " ") : "Hello World!";
 
     auto evbase = event_base_new();
     LibEventHandlerMyError handler(evbase);
@@ -32,13 +33,18 @@ main(int argc, const char* argv[])
             std::cout << "Channel error: " << message << std::endl;
             event_base_loopbreak(evbase);
         });
-    channel.declareExchange("logs", AMQP::fanout)
+    channel.declareExchange("topic_logs", AMQP::topic)
+        .onError([&](const char* msg)
+        {
+            std::cout << "ERROR: " << msg << std::endl;
+        })
         .onSuccess
         (
             [&]()
             {
-                channel.publish("logs", "", msg);
-                std::cout << "Sent '" << msg << "'" << std::endl;
+                channel.publish("topic_logs", routing_key, msg);
+                std::cout << "Sent " << routing_key << ": '"
+                          << msg << "'" << std::endl;
                 event_base_loopbreak(evbase);
             }
         );
@@ -46,6 +52,4 @@ main(int argc, const char* argv[])
     event_base_free(evbase);
     return 0;
 }
-
-
 

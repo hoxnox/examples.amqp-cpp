@@ -10,6 +10,11 @@ main(void)
 
     AMQP::TcpConnection connection(&hndl, AMQP::Address("amqp://localhost/"));
     AMQP::TcpChannel channel(&connection);
+    channel.onError([&evbase](const char* message)
+        {
+            std::cout << "Channel error: " << message << std::endl;
+            event_base_loopbreak(evbase);
+        });
     channel.declareQueue("hello", AMQP::passive)
         .onSuccess
         (

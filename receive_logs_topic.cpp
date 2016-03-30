@@ -10,8 +10,7 @@ main(int argc, char* argv[])
 {
     if (argc < 2)
     {
-        std::cout << "Usage: log_level..." << std::endl
-                  << "log level examples: info, warning, error" << std::endl;
+        std::cout << "Usage: <bind key>..." << std::endl;
         return 0;
     }
     ConnHandler handler;
@@ -24,12 +23,13 @@ main(int argc, char* argv[])
             std::cout << "Channel error: " << message << std::endl;
             handler.Stop();
         });
-    channel.declareExchange("direct_logs", AMQP::direct);
+    channel.declareExchange("topic_logs", AMQP::topic | AMQP::autodelete);
     channel.declareQueue("logs", AMQP::exclusive);
     std::for_each (argv + 1, argv + argc,
-        [&](const char* log_level)
+        [&](const char* bind_key)
         {
-            channel.bindQueue("direct_logs", "", log_level);
+            std::cout << bind_key << std::endl;
+            channel.bindQueue("topic_logs", "logs", bind_key);
             channel.consume("logs", AMQP::noack)
                 .onReceived
                 (
@@ -46,4 +46,5 @@ main(int argc, char* argv[])
     connection.close();
     return 0;
 }
+
 

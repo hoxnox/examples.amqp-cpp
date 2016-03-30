@@ -10,6 +10,11 @@ main(void)
             AMQP::Address("localhost", 5672,
                           AMQP::Login("guest", "guest"), "/"));
     AMQP::TcpChannel channel(&connection);
+    channel.onError([&handler](const char* message)
+        {
+            std::cout << "Channel error: " << message << std::endl;
+            handler.Stop();
+        });
 
     auto printLog = [](const AMQP::Message &message,
                        uint64_t deliveryTag,

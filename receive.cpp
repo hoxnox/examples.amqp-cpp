@@ -8,6 +8,11 @@ main(void)
     ConnHandler handler;
     AMQP::TcpConnection connection(handler, AMQP::Address("amqp://localhost/"));
     AMQP::TcpChannel channel(&connection);
+    channel.onError([&handler](const char* message)
+        {
+            std::cout << "Channel error: " << message << std::endl;
+            handler.Stop();
+        });
     channel.declareQueue("hello", AMQP::autodelete)
         .onSuccess
         (

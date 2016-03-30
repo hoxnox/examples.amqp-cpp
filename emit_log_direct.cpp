@@ -28,6 +28,11 @@ main(int argc, const char* argv[])
             AMQP::Address("localhost", 5672,
                           AMQP::Login("guest", "guest"), "/"));
     AMQP::TcpChannel channel(&connection);
+    channel.onError([&evbase](const char* message)
+        {
+            std::cout << "Channel error: " << message << std::endl;
+            event_base_loopbreak(evbase);
+        });
     channel.declareExchange("direct_logs", AMQP::direct)
         .onSuccess
         (

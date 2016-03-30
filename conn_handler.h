@@ -6,11 +6,14 @@
 class LibEventHandlerMyError : public AMQP::LibEventHandler
 {
 public:
-    LibEventHandlerMyError(struct event_base* evbase) : LibEventHandler(evbase) {}
+    LibEventHandlerMyError(struct event_base* evbase) : LibEventHandler(evbase), evbase_(evbase_) {}
     void onError(AMQP::TcpConnection *connection, const char *message) override
     {
         std::cout << "Error: " << message << std::endl;
+        event_base_loopbreak(evbase_);
     }
+private:
+    struct event_base* evbase_ {nullptr};
 };
 
 class ConnHandler
@@ -32,6 +35,10 @@ public:
     {
         std::cout << "Waiting for messages. Press enter to exit." << std::endl;
         event_base_dispatch(evbase_.get());
+    }
+    void Stop()
+    {
+        event_base_loopbreak(evbase_.get());
     }
 
     operator AMQP::TcpHandler*()

@@ -10,8 +10,8 @@ add_definitions("-std=c++11")
 include(ExternalProject)
 set(AMQPCPP_ROOT "${CMAKE_CURRENT_BINARY_DIR}/amqpcpp")
 ExternalProject_Add(libamqpcpp
-    URL "https://github.com/hoxnox/AMQP-CPP/archive/v2.5.1-nx1.tar.gz"
-    URL_MD5 "0769867d464f1c30d4fed9016c8b6b34"
+    URL "https://github.com/hoxnox/AMQP-CPP/archive/v2.5.1-nx2.tar.gz"
+    URL_MD5 "fcfbd25c03eecde4e4b0dfa58598a426"
     CMAKE_ARGS -Wno-dev "-DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>"
     INSTALL_DIR ${AMQPCPP_ROOT}
 )
